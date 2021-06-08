@@ -3,7 +3,9 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PermissionController;
+// use App\Http\Controllers\PermissionController;
+use App\Http\Controllers;
+use App\Http\Controllers\PageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +33,11 @@ Route::group([
     Route::middleware('auth:api')->post('logout', [AuthController::class, 'logout']);
     Route::middleware('auth:api')->post('refresh', [AuthController::class, 'refresh']);
     Route::post('register', [AuthController::class, 'register']);
-    Route::post('me', [AuthController::class, 'me']);
 
     Route::get('/roles', [PermissionController::class, 'Permission']);
+
+
+    Route::resource('/page', PageController::class);
+
+
 });
