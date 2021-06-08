@@ -17,14 +17,17 @@ class PermissionController extends Controller
 		//RoleTableSeeder.php
 		$dev_role = new Role();
 		$dev_role->slug = 'developer';
-		$dev_role->nickname = 'Front-end Developer';
+		$dev_role->name = 'Front-end Developer';
 		$dev_role->save();
+
+        $manager_role = new Role();
+		$manager_role->slug = 'manager';
+		$manager_role->name = 'Assistant Manager';
+		$manager_role->save();
+
 		$dev_role->permissions()->attach($dev_permission);
 
-		$manager_role = new Role();
-		$manager_role->slug = 'manager';
-		$manager_role->nickname = 'Assistant Manager';
-		$manager_role->save();
+
 		$manager_role->permissions()->attach($manager_permission);
 
 		$dev_role = Role::where('slug','developer')->first();
@@ -32,13 +35,13 @@ class PermissionController extends Controller
 
 		$createTasks = new Permission();
 		$createTasks->slug = 'create-tasks';
-		$createTasks->nickname = 'Create Tasks';
+		$createTasks->name = 'Create Tasks';
 		$createTasks->save();
 		$createTasks->roles()->attach($dev_role);
 
 		$editUsers = new Permission();
 		$editUsers->slug = 'edit-users';
-		$editUsers->nickname = 'Edit Users';
+		$editUsers->name = 'Edit Users';
 		$editUsers->save();
 		$editUsers->roles()->attach($manager_role);
 
@@ -48,7 +51,7 @@ class PermissionController extends Controller
 		$manager_perm = Permission::where('slug','edit-users')->first();
 
 		$developer = new User();
-		$developer->nickname = 'Mahedi Hasan';
+		$developer->name = 'Mahedi Hasan';
 		$developer->email = 'mahedi@gmail.com';
 		$developer->password = bcrypt('secrettt');
 		$developer->save();
@@ -56,7 +59,7 @@ class PermissionController extends Controller
 		$developer->permissions()->attach($dev_perm);
 
 		$manager = new User();
-		$manager->nickname = 'Hafizul Islam';
+		$manager->name = 'Hafizul Islam';
 		$manager->email = 'hafiz@gmail.com';
 		$manager->password = bcrypt('secrettt');
 		$manager->save();
